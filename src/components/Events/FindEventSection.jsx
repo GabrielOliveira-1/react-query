@@ -1,7 +1,13 @@
-import { useRef } from 'react';
+import { useRef } from "react";
+import { fetchEvents } from "../../util/http";
 
 export default function FindEventSection() {
   const searchElement = useRef();
+
+  useQuery({
+    queryKey: ["events"],
+    queryFn: () => fetchEvents(searchElement.current.value),
+  });
 
   function handleSubmit(event) {
     event.preventDefault();
